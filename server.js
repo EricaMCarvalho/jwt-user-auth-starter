@@ -4,7 +4,9 @@ const morgan = require('morgan');
 const colors = require('colors');
 
 const connectDB = require('./config/database');
+const errorHandler = require('./middleware/errorHandler');
 
+// Routes
 const authRouter = require('./routes/auth');
 
 dotenv.config();

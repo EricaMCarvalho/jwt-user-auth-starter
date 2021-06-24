@@ -3,7 +3,7 @@
  * Route:   POST /api/auth/register
  * Access:  Public
  */
-exports.register = (req, res) => {
+exports.register = (req, res, next) => {
   res.send('Register');
 };
 
@@ -12,6 +12,6 @@ exports.register = (req, res) => {
  * Route:   POST /api/auth/login
  * Access:  Public
  */
-exports.login = (req, res) => {
+exports.login = (req, res, next) => {
   res.send('Login');
 };
