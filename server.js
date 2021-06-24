@@ -5,6 +5,8 @@ const colors = require('colors');
 
 const connectDB = require('./config/database');
 
+const authRouter = require('./routes/auth');
+
 dotenv.config();
 
 connectDB();
@@ -16,6 +18,9 @@ app.use(express.json());
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
+
+// Routes
+app.use('/api/auth', authRouter);
 
 app.get('/', (req, res) => res.send('The API is running...'));
 
