@@ -9,8 +9,12 @@ const User = require('../models/User');
  */
 exports.register = asyncHandler(async (req, res, next) => {
   const { name, email, password } = req.body;
+
   const user = await User.create({ name, email, password });
-  res.status(200).json({ success: true, data: user });
+
+  const token = user.getSignedJwtToken();
+
+  res.status(200).json({ success: true, token });
 });
 
 /*
@@ -37,5 +41,7 @@ exports.login = asyncHandler(async (req, res, next) => {
     return next(new ErrorResponse('Invalid credentials', 401));
   }
 
-  res.status(200).json({ success: true, data: user });
+  const token = user.getSignedJwtToken();
+
+  res.status(200).json({ success: true, token });
 });
