@@ -1,10 +1,11 @@
 const mongoose = require('mongoose');
 
-module.exports = async () => {
+const connectDB = async () => {
   try {
     mongoose.connect(process.env.MONGO_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
+      useCreateIndex: true,
     });
     console.log('MongoDB is connected...'.green.inverse);
   } catch (error) {
@@ -12,3 +13,5 @@ module.exports = async () => {
     process.exit(1);
   }
 };
+
+module.exports = connectDB;

@@ -21,10 +21,12 @@ if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 
-// Routes
+// Routers
 app.use('/api/auth', authRouter);
 
 app.get('/', (req, res) => res.send('The API is running...'));
+
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 3001;
 
@@ -34,3 +36,8 @@ app.listen(
     `Server is running in ${process.env.NODE_ENV} on port ${PORT}`.cyan.inverse
   )
 );
+
+process.on('unhandledRejection', (err, promise) => {
+  console.log(`Error: ${err.message}`.red);
+  server.close(() => process.exit(1));
+});
