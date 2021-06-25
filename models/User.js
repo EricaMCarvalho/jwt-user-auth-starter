@@ -22,6 +22,10 @@ const UserSchema = mongoose.Schema({
     minlength: 8,
     select: false,
   },
+  role: {
+    type: String,
+    default: 'user',
+  },
   createdAt: {
     type: Date,
     default: Date.now,

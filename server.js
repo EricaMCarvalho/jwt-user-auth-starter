@@ -9,6 +9,7 @@ const errorHandler = require('./middleware/errorHandler');
 
 // Routes
 const authRouter = require('./routes/auth');
+const adminRouter = require('./routes/admin');
 
 dotenv.config();
 
@@ -26,6 +27,7 @@ if (process.env.NODE_ENV === 'development') {
 
 // Routers
 app.use('/api/auth', authRouter);
+app.use('/api/admin', adminRouter);
 
 app.get('/', (req, res) => res.send('The API is running...'));
 
