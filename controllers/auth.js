@@ -1,5 +1,6 @@
 const asyncHandler = require('../middleware/asyncHandler');
 const ErrorResponse = require('../utils/errorResponse');
+const sendTokenResponse = require('../utils/sendTokenResponse');
 const User = require('../models/User');
 
 /*
@@ -12,9 +13,7 @@ exports.register = asyncHandler(async (req, res, next) => {
 
   const user = await User.create({ name, email, password });
 
-  const token = user.getSignedJwtToken();
-
-  res.status(200).json({ success: true, token });
+  sendTokenResponse(user, 200, res);
 });
 
 /*
@@ -41,7 +40,5 @@ exports.login = asyncHandler(async (req, res, next) => {
     return next(new ErrorResponse('Invalid credentials', 401));
   }
 
-  const token = user.getSignedJwtToken();
-
-  res.status(200).json({ success: true, token });
+  sendTokenResponse(user, 200, res);
 });
